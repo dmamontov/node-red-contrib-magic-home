@@ -1,5 +1,5 @@
 {
-  "name": "node-red-contrib-magic-home",
+  "name": "node-red-contrib-magic-home-local",
   "node-red": {
     "nodes": {
       "magic-home-devices": "nodes/magic-home-devices.js",

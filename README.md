@@ -8,7 +8,7 @@ Nodes:
   
 Installation:
 ```
-npm install node-red-contrib-magic-home
+npm install node-red-contrib-magic-home-local
 ``` 
 
 TODO:
