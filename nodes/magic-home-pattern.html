@@ -1,0 +1,99 @@
+<script type="text/html" data-template-name="magic-home-pattern">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-device"><i class="fa fa-lightbulb"></i> Device</label>
+        <select id="node-input-device">
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-pattern"><i class="fa fa-clone"></i> Pattern</label>
+        <select id="node-input-pattern">
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-speed"><i class="fa fa-tachometer-alt"></i> Speed</label>
+        <input type="number" id="node-input-speed" placeholder="Speed">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="magic-home-pattern">
+    <p>Getting status MagicHome device</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('magic-home-pattern', {
+        category: 'MagicHome',
+        color: '#1d9eda',
+        defaults: {
+            name: {
+                value: null,
+                required: false
+            },
+            device: {
+                value: null,
+                required: true
+            },
+            pattern: {
+                value: null,
+                required: false
+            },
+            speed: {
+                value: null,
+                required: false
+            }
+        },
+        inputs:1,
+        outputs:1,
+        align: 'right',
+        icon: 'magic-home.png',
+        paletteLabel: 'pattern',
+        label: function() {
+            return this.name || 'pattern';
+        },
+        oneditprepare: function() {
+            $('#node-input-device').prop('disabled', true);
+            $('#node-input-pattern').prop('disabled', true);
+
+            let node = this;
+
+            $.get('/magic-home/devices', function(devices) {
+                $('#node-input-device').prop('disabled', false);
+
+                for (const [key, device] of Object.entries(devices)) {
+                    $('#node-input-device').append(new Option(
+                        device.address + ' - ' + device.model,
+                        device.address,
+                        false,
+                        device.address === node.device
+                    ));
+                }
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                RED.notify(textStatus, 'error');
+            });
+
+            $.get('/magic-home/patterns', function(patterns) {
+                $('#node-input-pattern').prop('disabled', false);
+
+                $('#node-input-pattern').append(new Option(
+                    '-'
+                ));
+
+                for (const [key, pattern] of Object.entries(patterns)) {
+                    $('#node-input-pattern').append(new Option(
+                        pattern,
+                        pattern,
+                        false,
+                        pattern === node.pattern
+                    ));
+                }
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                RED.notify(textStatus, 'error');
+            });
+        }
+    });
+</script>

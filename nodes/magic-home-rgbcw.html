@@ -1,0 +1,61 @@
+<script type="text/html" data-template-name="magic-home-rgbcw">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-device"><i class="fa fa-lightbulb"></i> Device</label>
+        <select id="node-input-device">
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="magic-home-rgbcw">
+    <p>Getting status MagicHome device</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('magic-home-rgbcw', {
+        category: 'MagicHome',
+        color: '#1d9eda',
+        defaults: {
+            name: {
+                value: null,
+                required: false
+            },
+            device: {
+                value: null,
+                required: true
+            }
+        },
+        inputs:1,
+        outputs:1,
+        align: 'right',
+        icon: 'magic-home.png',
+        paletteLabel: 'rgb/ww/cw',
+        label: function() {
+            return this.name || 'rgb/ww/cw';
+        },
+        oneditprepare: function() {
+            $('#node-input-device').prop('disabled', true);
+
+            let node = this;
+
+            $.get('/magic-home/devices', function(devices) {
+                $('#node-input-device').prop('disabled', false);
+
+                for (const [key, device] of Object.entries(devices)) {
+                    $('#node-input-device').append(new Option(
+                        device.address + ' - ' + device.model,
+                        device.address,
+                        false,
+                        device.address === node.device
+                    ));
+                }
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                RED.notify(textStatus, 'error');
+            });
+        }
+    });
+</script>

@@ -1,0 +1,39 @@
+{
+  "name": "node-red-contrib-magic-home",
+  "node-red": {
+    "nodes": {
+      "magic-home-devices": "nodes/magic-home-devices.js",
+      "magic-home-status": "nodes/magic-home-status.js",
+      "magic-home-on": "nodes/magic-home-on.js",
+      "magic-home-rgbcw": "nodes/magic-home-rgbcw.js",
+      "magic-home-pattern": "nodes/magic-home-pattern.js"
+    }
+  },
+  "keywords": [
+    "node-red",
+    "magichome",
+    "local"
+  ],
+  "bugs": {
+    "url": "https://github.com/dmamontov/node-red-contrib-magic-home/issues/"
+  },
+  "homepage": "https://github.com/dmamontov/node-red-contrib-magic-home",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmamontov/node-red-contrib-magic-home.git"
+  },
+  "version": "1.0.0",
+  "description": "MagicHome integration",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dmitry Mamontov",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "magic-home": "^2.6.1"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {}
+}
