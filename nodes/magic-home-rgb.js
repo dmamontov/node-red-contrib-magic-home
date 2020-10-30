@@ -11,10 +11,10 @@ module.exports = function(RED) {
         let node = this;
 
         node.on("input", function(msg, send, done) {
-            this.control.setColor(
+            node.control.setColor(
                     msg.payload.r || 0,
                     msg.payload.g || 0,
-		    msg.payload.b || 0
+                    msg.payload.b || 0
                 )
                 .then(state => {
                     node.status({ fill: "green", shape: "ring", text: "ok" });
