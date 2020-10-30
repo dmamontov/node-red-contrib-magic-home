@@ -12,14 +12,14 @@ module.exports = function(RED) {
 
         node.on("input", function(msg, send, done) {
             node.control.setWhites(
-                    msg.payload.ww || 0,
-                    msg.payload.cw || 0,
-                )
-                .then(state => {
-                    node.status({ fill: "green", shape: "ring", text: "ok" });
+                msg.payload.ww || 0,
+                msg.payload.cw || 0,
+            )
+            .then(state => {
+                node.status({ fill: "green", shape: "ring", text: "ok" });
 
-                    node.send({payload: state, input: msg});
-                }).catch(err => {
+                node.send({payload: state, input: msg});
+            }).catch(err => {
                 node.status({ fill: "red", shape: "ring", text: "error" });
 
                 node.error(err.message);

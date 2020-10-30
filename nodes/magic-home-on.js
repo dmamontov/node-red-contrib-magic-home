@@ -17,10 +17,10 @@ module.exports = function(RED) {
 
                     node.send({payload: state, input: msg});
                 }).catch(err => {
-                node.status({ fill: "red", shape: "ring", text: "error" });
+                    node.status({ fill: "red", shape: "ring", text: "error" });
 
-                node.error(err.message);
-            });
+                    node.error(err.message);
+                });
         });
     }
 
