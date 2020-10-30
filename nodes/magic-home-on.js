@@ -11,7 +11,7 @@ module.exports = function(RED) {
         let node = this;
 
         node.on("input", function(msg, send, done) {
-            (msg.payload === false ? this.control.turnOff() : this.control.turnOn())
+            (msg.payload === false ? node.control.turnOff() : node.control.turnOn())
                 .then(state => {
                     node.status({ fill: "green", shape: "ring", text: "ok" });
 

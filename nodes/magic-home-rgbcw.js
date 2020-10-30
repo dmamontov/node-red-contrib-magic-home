@@ -11,7 +11,7 @@ module.exports = function(RED) {
         let node = this;
 
         node.on("input", function(msg, send, done) {
-            this.control.setColorAndWhites(
+            node.control.setColorAndWhites(
                     msg.payload.r || 0,
                     msg.payload.g || 0,
                     msg.payload.b || 0,

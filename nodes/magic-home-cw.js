@@ -11,7 +11,7 @@ module.exports = function(RED) {
         let node = this;
 
         node.on("input", function(msg, send, done) {
-            this.control.setWhites(
+            node.control.setWhites(
                     msg.payload.ww || 0,
                     msg.payload.cw || 0,
                 )

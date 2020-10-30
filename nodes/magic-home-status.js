@@ -11,7 +11,7 @@ module.exports = function(RED) {
         let node = this;
 
         node.on("input", function(msg, send, done) {
-            this.control.queryState().then(state => {
+            node.control.queryState().then(state => {
                 node.status({ fill: "green", shape: "ring", text: "ok" });
 
                 node.send({payload: state, input: msg.payload});
