@@ -5,6 +5,8 @@
       "magic-home-devices": "nodes/magic-home-devices.js",
       "magic-home-status": "nodes/magic-home-status.js",
       "magic-home-on": "nodes/magic-home-on.js",
+      "magic-home-rgb": "nodes/magic-home-rgb.js",
+      "magic-home-cw": "nodes/magic-home-cw.js",
       "magic-home-rgbcw": "nodes/magic-home-rgbcw.js",
       "magic-home-pattern": "nodes/magic-home-pattern.js"
     }
