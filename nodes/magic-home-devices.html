@@ -1,10 +1,54 @@
+<script type="text/x-red" data-template-name="magic-home-devices">
+    <input autocomplete="false" name="hidden" type="text" style="display:none;">
+    <div class="form-row">
+        <label for="node-config-input-name" class="l-width"><i class="fa fa-bookmark"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-ip"><i class="fa fa-map-marker"></i> IP</label>
+        <input type="text" id="node-config-input-ip" placeholder="Device IP">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-connectiontimeout"><i class="fa fa-tachometer-alt"></i> Connection Timeout</label>
+        <input type="number" id="node-config-input-connectiontimeout" placeholder="10000">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-commandtimeout"><i class="fa fa-tachometer-alt"></i> Command Timeout</label>
+        <input type="number" id="node-config-input-commandtimeout" placeholder="10000">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-applymasks"><i class="fa fa-mask"></i> Apply Masks</label>
+        <input type="checkbox" value="false" id="node-config-input-applymasks" style="display: inline-block; width: auto; vertical-align: top;"/>
+    </div>
+</script>
+
 <script type='text/javascript'>
     RED.nodes.registerType('magic-home-devices', {
-        category: 'config',
-        defaults: {
-        },
-        label: function() {
-            return 'devices';
-        }
+          category: 'config',
+          defaults: {
+                name: {
+                    value: null,
+                    required: false
+                },
+                ip: {
+                    value: null,
+                    required: true
+                },
+                connectiontimeout: {
+                    value: 10000,
+                    required: true
+                },
+                commandtimeout: {
+                    value: 10000,
+                    required: true
+                },
+                applymasks: {
+                    value: false,
+                    required: true
+                }
+          },
+          label: function() {
+                return this.name || this.ip;
+          }
     });
 </script>

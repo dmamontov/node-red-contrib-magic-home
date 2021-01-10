@@ -6,7 +6,17 @@ module.exports = function(RED) {
     function on(config) {
         RED.nodes.createNode(this, config);
 
-        this.control = new Control(config.device, {command_timeout: 10000});
+        this.device = config.device;
+        this.deviceNode = RED.nodes.getNode(this.device);
+
+        this.control = new Control(
+            this.deviceNode.ip,
+            {
+                connect_timeout: parseInt(this.deviceNode.connectionTimeout),
+                command_timeout: parseInt(this.deviceNode.commandTimeout),
+                apply_masks: this.deviceNode.apply_masks
+            }
+        );
 
         let node = this;
 

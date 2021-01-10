@@ -4,9 +4,8 @@
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-device"><i class="fa fa-lightbulb"></i> Device</label>
-        <select id="node-input-device">
-        </select>
+        <label for="node-input-device"><i class="icon-tag"></i> Device</label>
+        <input type="text" id="node-input-device" placeholder="Device">
     </div>
     <div class="form-row">
         <label for="node-input-pattern"><i class="fa fa-clone"></i> Pattern</label>
@@ -33,7 +32,7 @@
                 required: false
             },
             device: {
-                value: null,
+                type: "magic-home-devices",
                 required: true
             },
             pattern: {
@@ -54,26 +53,9 @@
             return this.name || 'pattern';
         },
         oneditprepare: function() {
-            $('#node-input-device').prop('disabled', true);
             $('#node-input-pattern').prop('disabled', true);
 
             let node = this;
-
-            $.get('/magic-home/devices', function(devices) {
-                $('#node-input-device').prop('disabled', false);
-
-                for (const [key, device] of Object.entries(devices)) {
-                    $('#node-input-device').append(new Option(
-                        device.address + ' - ' + device.model,
-                        device.address,
-                        false,
-                        device.address === node.device
-                    ));
-                }
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                RED.notify(textStatus, 'error');
-            });
 
             $.get('/magic-home/patterns', function(patterns) {
                 $('#node-input-pattern').prop('disabled', false);

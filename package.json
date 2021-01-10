@@ -24,7 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/dmamontov/node-red-contrib-magic-home.git"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "MagicHome integration",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
